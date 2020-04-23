@@ -70,7 +70,7 @@ stages:
   displayName: 'Deploy to the dev environment'
   dependsOn: Build
   jobs:
-  - deployment: Deploy
+  - deployment: Dev_Deploy
     pool:
       vmImage: 'ubuntu-16.04'
     environment: dev
@@ -93,7 +93,7 @@ stages:
   displayName: 'Deploy to the test environment'
   dependsOn: Dev
   jobs:
-  - deployment: Deploy
+  - deployment: Test_Deploy
     pool:
       vmImage: 'ubuntu-16.04'
     environment: test
@@ -112,7 +112,7 @@ stages:
               appName: '$(WebAppNameTest)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
   - job: RunUITests
-    dependsOn: Deploy
+    dependsOn: Test_Deploy
     displayName: 'Run UI tests'
     pool:
       vmImage: 'windows-2019'
@@ -137,11 +137,11 @@ stages:
         publishTestResults: true
         projects: '$(System.DefaultWorkingDirectory)/**/*UITests.csproj'
 
-- stage: 'Staging'
-  displayName: 'Deploy to the staging environment'
+- stage: 'Prod'
+  displayName: 'Deploy to the Prod environment'
   dependsOn: Test
   jobs:
-  - deployment: Deploy
+  - deployment: Prod_Deploy
     pool:
       vmImage: 'ubuntu-16.04'
     environment: staging
@@ -157,5 +157,5 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(WebAppNameStaging)'
+              appName: '$(WebAppNameProd)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
