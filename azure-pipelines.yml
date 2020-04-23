@@ -67,7 +67,7 @@ stages:
       artifact: drop
 
 - stage: 'Dev'
-  displayName: 'Deploy to the dev environment'
+  displayName: 'Deploy to Dev environment'
   dependsOn: Build
   jobs:
   - deployment: Dev_Deploy
@@ -90,7 +90,7 @@ stages:
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 
 - stage: 'Test'
-  displayName: 'Deploy to the test environment'
+  displayName: 'Deploy to Test environment'
   dependsOn: Dev
   jobs:
   - deployment: Test_Deploy
@@ -138,7 +138,7 @@ stages:
         projects: '$(System.DefaultWorkingDirectory)/**/*UITests.csproj'
 
 - stage: 'Prod'
-  displayName: 'Deploy to the Prod environment'
+  displayName: 'Deploy to Prod environment'
   dependsOn: Test
   jobs:
   - deployment: Prod_Deploy
