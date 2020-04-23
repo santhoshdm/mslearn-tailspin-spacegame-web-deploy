@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace UITests
 {
-    [TestFixture("Chrome")]
+    //[TestFixture("Chrome")]
     [TestFixture("Firefox")]
     [TestFixture("IE")]
     public class HomePageTest
@@ -35,9 +35,9 @@ namespace UITests
                 // Create the driver for the current browser.
                 switch(browser)
                 {
-                  case "Chrome":
-                    driver = new ChromeDriver(cwd);
-                    break;
+                  //case "Chrome":
+                    //driver = new ChromeDriver(cwd);
+                   // break;
                   case "Firefox":
                     driver = new FirefoxDriver(cwd);
                     break;
