@@ -11,7 +11,7 @@ namespace UITests
 {
     //[TestFixture("Chrome")]
     [TestFixture("Firefox")]
-   // [TestFixture("IE")]
+    [TestFixture("IE")]
     public class HomePageTest
     {
         private string browser;
@@ -41,9 +41,9 @@ namespace UITests
                   case "Firefox":
                     driver = new FirefoxDriver(cwd);
                     break;
-                 // case "IE":
-                  //  driver = new InternetExplorerDriver(cwd);
-                 //   break;
+                  case "IE":
+                    driver = new InternetExplorerDriver(cwd);
+                    break;
                   default:
                     throw new ArgumentException($"'{browser}': Unknown browser");
                 }
